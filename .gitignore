@@ -1,0 +1,4 @@
+*.yml
+gopath/
+vendor/
+lepsius-lumber
