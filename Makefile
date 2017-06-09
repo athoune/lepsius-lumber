@@ -13,5 +13,11 @@ gopath/src/github.com/athoune/lepsius-lumber: gopath/src/github.com/athoune
 vendor:
 	glide install
 
+linux:
+	docker run --rm -v `pwd`:/go golang:latest make
+
+upx:
+	upx lepsius-lumber
+
 clean:
 	rm -rf vendor gopath
