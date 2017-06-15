@@ -1,5 +1,5 @@
-hash: 395961fdc8b0bf39ea848f47f72861c75c030c26a76961bd06846e5ca5dc2bc0
-updated: 2017-06-05T19:22:03.48965315+02:00
+hash: 44b0c232b045ede941273a9497ccbd9fa003a290134035b58470e22643b34d3b
+updated: 2017-06-14T21:35:59.950280948+02:00
 imports:
 - name: github.com/elastic/go-lumber
   version: 616041e345fc33c97bc0eb0fa6b388aa07bca3e1
@@ -19,4 +19,18 @@ imports:
   - zlib
 - name: github.com/klauspost/cpuid
   version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
+- name: github.com/mailru/easyjson
+  version: 44c0351a5bc860bcb2608d54aa03ea686c4e7b25
+- name: github.com/pquerna/ffjson
+  version: 0a1032732ea92f86ab22e27b9d55cd182f2f4a1b
+  subpackages:
+  - ffjson
+  - fflib/v1
+  - fflib/v1/internal
+- name: github.com/ugorji/go
+  version: 708a42d246822952f38190a8d8c4e6b16a0e600c
+  subpackages:
+  - codec
+- name: gopkg.in/alexcesaro/statsd.v2
+  version: 7fea3f0d2fab1ad973e641e51dba45443a311a90
 testImports: []
