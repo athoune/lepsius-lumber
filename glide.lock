@@ -1,6 +1,10 @@
-hash: 44b0c232b045ede941273a9497ccbd9fa003a290134035b58470e22643b34d3b
-updated: 2017-06-14T21:35:59.950280948+02:00
+hash: 5c3166184f435bb356f52082f3383b5b7596bd4c67bfc3ade786fd9fc478ac84
+updated: 2017-06-26T22:43:19.947515218+02:00
 imports:
+- name: github.com/athoune/lepsius-lumber
+  version: 8315ad6f000ae5c53841c72b948eecbd19f26296
+  subpackages:
+  - sql
 - name: github.com/elastic/go-lumber
   version: 616041e345fc33c97bc0eb0fa6b388aa07bca3e1
   subpackages:
@@ -20,7 +24,19 @@ imports:
 - name: github.com/klauspost/cpuid
   version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
 - name: github.com/mailru/easyjson
-  version: 44c0351a5bc860bcb2608d54aa03ea686c4e7b25
+  version: 2f5df55504ebc322e4d52d34df6a1f5b503bf26d
+  subpackages:
+  - bootstrap
+  - buffer
+  - gen
+  - jlexer
+  - jwriter
+  - opt
+  - parser
+- name: github.com/percona/go-mysql
+  version: 2a6037d7d809b18ebd6d735b397f2321879af611
+  subpackages:
+  - query
 - name: github.com/pquerna/ffjson
   version: 0a1032732ea92f86ab22e27b9d55cd182f2f4a1b
   subpackages:
@@ -28,7 +44,7 @@ imports:
   - fflib/v1
   - fflib/v1/internal
 - name: github.com/ugorji/go
-  version: 708a42d246822952f38190a8d8c4e6b16a0e600c
+  version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
   subpackages:
   - codec
 - name: gopkg.in/alexcesaro/statsd.v2
