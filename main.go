@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/athoune/lepsius-lumber/sql"
 	"github.com/elastic/go-lumber/server"
+	"github.com/percona/go-mysql/query"
 )
 
 func main() {
@@ -21,10 +22,11 @@ func main() {
 				return err
 			}
 			v = m
+			fmt.Println("Mysql ", m.Method, m.ResponseTime, m.Query, query.Fingerprint(m.Query))
 		default:
 			v = pb
+			fmt.Println("JSON : ", pb.Type, string(raw))
 		}
-		fmt.Println("JSON : ", v)
 		return nil
 	}))
 	if err != nil {
