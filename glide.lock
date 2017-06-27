@@ -1,12 +1,13 @@
-hash: 5c3166184f435bb356f52082f3383b5b7596bd4c67bfc3ade786fd9fc478ac84
-updated: 2017-06-26T22:43:19.947515218+02:00
+hash: 3f010da5086ea12ccae29c0449253b4749cc1ad8114409b5635e9984cbed25e0
+updated: 2017-06-27T22:31:15.42317894+02:00
 imports:
 - name: github.com/athoune/lepsius-lumber
   version: 8315ad6f000ae5c53841c72b948eecbd19f26296
   subpackages:
   - sql
 - name: github.com/elastic/go-lumber
-  version: 616041e345fc33c97bc0eb0fa6b388aa07bca3e1
+  version: 7cb1a7a10106022105aea3b9b210a805185476a5
+  repo: https://github.com/bearstech/go-lumber.git
   subpackages:
   - lj
   - log

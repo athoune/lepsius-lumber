@@ -1,7 +1,8 @@
 package: .
 import:
 - package: github.com/elastic/go-lumber
-  version: ^0.1.0
+  repo: https://github.com/bearstech/go-lumber.git
+  version: 7cb1a7a10106022105aea3b9b210a805185476a5
   subpackages:
   - server
   - lj

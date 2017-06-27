@@ -7,38 +7,43 @@ import (
 	"github.com/percona/go-mysql/query"
 )
 
-func main() {
-	s, err := server.ListenAndServe(":5044", server.V2(true), server.JSONDecoder(func(raw []byte, v interface{}) error {
-		pb := sql.Packetbeat{}
-		err := pb.UnmarshalJSON(raw)
+func readPacket(raw []byte) (interface{}, error) {
+	pb := sql.Packetbeat{}
+	err := pb.UnmarshalJSON(raw)
+	if err != nil {
+		return nil, err
+	}
+	switch {
+	case pb.Type == "mysql":
+		m := sql.Mysql{}
+		err = m.UnmarshalJSON(raw)
 		if err != nil {
-			return err
+			return nil, err
 		}
-		switch {
-		case pb.Type == "mysql":
-			m := sql.Mysql{}
-			err = m.UnmarshalJSON(raw)
-			if err != nil {
-				return err
-			}
-			v = m
-			fmt.Printf("Mysql method:%s response time: %v\n%s\n", m.Method, m.ResponseTime, query.Fingerprint(m.Query))
-		default:
-			v = pb
-			fmt.Println("JSON : ", pb.Type, string(raw))
-		}
-		return nil
-	}))
+		return m, nil
+	default:
+		return pb, nil
+	}
+}
+
+func main() {
+	s, err := server.ListenAndServe(":5044", server.V2(true), server.JSONDecoder(readPacket))
 	if err != nil {
 		panic(err)
 	}
 	for {
 		batch := s.Receive()
 		for _, event := range batch.Events {
-			fmt.Printf("Event : %#v\n", event)
-			beat, ok := event.(map[string]interface{})
-			if ok {
-				fmt.Printf("Type: %v\n", beat["type"])
+			beat, ok := event.(Packetbeat)
+			if !ok {
+				continue
+			}
+			if beat.Type == "mysql" {
+				m, ok := event.(sql.Mysql)
+				if !ok {
+					panic("Cast drama")
+				}
+				fmt.Printf("Mysql method:%s response time: %v\n%s\n%#v\n", m.Method, m.ResponseTime, query.Fingerprint(m.Query), m.Mysql)
 			}
 		}
 		batch.ACK()
