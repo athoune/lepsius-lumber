@@ -34,8 +34,9 @@ func main() {
 	for {
 		batch := s.Receive()
 		for _, event := range batch.Events {
-			beat, ok := event.(Packetbeat)
+			beat, ok := event.(sql.Packetbeat)
 			if !ok {
+				fmt.Println("Not a beat: ", event)
 				continue
 			}
 			if beat.Type == "mysql" {
@@ -48,9 +49,4 @@ func main() {
 		}
 		batch.ACK()
 	}
-
-}
-
-type Packetbeat struct {
-	Type string `json:"type"`
 }
