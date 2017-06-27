@@ -22,7 +22,7 @@ func main() {
 				return err
 			}
 			v = m
-			fmt.Println("Mysql ", m.Method, m.ResponseTime, m.Query, query.Fingerprint(m.Query))
+			fmt.Printf("Mysql method:%s response time: %v\n%s\n", m.Method, m.ResponseTime, query.Fingerprint(m.Query))
 		default:
 			v = pb
 			fmt.Println("JSON : ", pb.Type, string(raw))
