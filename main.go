@@ -5,6 +5,7 @@ import (
 	"github.com/athoune/lepsius-lumber/sql"
 	"github.com/elastic/go-lumber/server"
 	"github.com/percona/go-mysql/query"
+	"reflect"
 )
 
 func readPacket(raw []byte) (interface{}, error) {
@@ -34,17 +35,12 @@ func main() {
 	for {
 		batch := s.Receive()
 		for _, event := range batch.Events {
-			beat, ok := event.(sql.Packetbeat)
-			if !ok {
-				fmt.Println("Not a beat: ", event)
-				continue
-			}
-			if beat.Type == "mysql" {
-				m, ok := event.(sql.Mysql)
-				if !ok {
-					panic("Cast drama")
-				}
-				fmt.Printf("Mysql method:%s response time: %v\n%s\n%#v\n", m.Method, m.ResponseTime, query.Fingerprint(m.Query), m.Mysql)
+			switch v := event.(type) {
+			case sql.Mysql:
+				fmt.Printf("Mysql method:%s response time: %v\n%s\n%#v\n",
+					v.Method, v.ResponseTime, query.Fingerprint(v.Query), v.Mysql)
+			default:
+				fmt.Println("Event: ", reflect.TypeOf(event))
 			}
 		}
 		batch.ACK()
